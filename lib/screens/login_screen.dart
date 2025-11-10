@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart'; // 1. ADDED: For Firebase sign-in
-import 'register_screen.dart'; // 2. ADDED: For navigation to the register page
+import 'package:firebase_auth/firebase_auth.dart';
+import 'register_screen.dart';
+import 'main_menu_screen.dart'; // 4. ADDED: For navigation to the main menu page
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -61,7 +62,13 @@ class _LoginScreenState extends State<LoginScreen> {
               backgroundColor: Colors.green,
             ),
           );
-          // FUTURE: Navigator.pushReplacement to your Main Menu Screen!
+          
+          // 5. UPDATED: Navigate to MainMenuScreen and replace the current screen
+          Navigator.of(context).pushReplacement(
+            MaterialPageRoute(
+              builder: (context) => MainMenuScreen(),
+            ),
+          );
         }
 
       } on FirebaseAuthException catch (e) {
@@ -85,7 +92,7 @@ class _LoginScreenState extends State<LoginScreen> {
     }
   }
 
-  // 3. ADDED: Function to navigate to the Registration Screen
+  // Function to navigate to the Registration Screen
   void _navigateToRegister() {
     Navigator.push(
       context,
@@ -188,7 +195,7 @@ class _LoginScreenState extends State<LoginScreen> {
               
               // --- Link to Register Screen ---
               TextButton(
-                onPressed: _navigateToRegister, // 4. UPDATED: Calls the navigation function
+                onPressed: _navigateToRegister,
                 child: const Text(
                   "Don't have an account? Register here.",
                   style: TextStyle(color: Colors.blueGrey),
